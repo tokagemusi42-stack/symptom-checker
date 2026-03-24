@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>どこが痛い？ - 症状チェッカー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="header">
+      <h1>どこが痛い？</h1>
+      <p>気になる場所をタップしてね</p>
+    </header>
+
+    <!-- 年齢タブ -->
+    <div class="age-tabs">
+      <button class="age-tab active" data-age="all">全年齢</button>
+      <button class="age-tab" data-age="teen">10代</button>
+      <button class="age-tab" data-age="twenty">20代</button>
+      <button class="age-tab" data-age="thirty">30代</button>
+      <button class="age-tab" data-age="forty">40代+</button>
+    </div>
+
+    <!-- 検索バー -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="例：右の下腹部が痛い、頭がズキズキする...">
+      <button id="searchBtn">調べる</button>
+    </div>
+
+    <!-- 広告①：バナー（320×50） -->
+    <div class="ad-slot ad-banner">
+      <span class="ad-label">広告</span>
+      <!-- Google AdSense などのコードをここに貼り付け -->
+      <!-- <ins class="adsbygoogle" ...></ins> -->
+    </div>
+
+    <div class="content">
+
+      <!-- 身体マップ -->
+      <div class="body-map-wrapper">
+        <svg class="body-svg" viewBox="0 0 200 540" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- 頭 -->
+          <g class="body-part" data-part="head">
+            <ellipse cx="100" cy="45" rx="32" ry="38" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <circle cx="89" cy="40" r="3.5" fill="var(--face-detail)" opacity="0.6"/>
+            <circle cx="111" cy="40" r="3.5" fill="var(--face-detail)" opacity="0.6"/>
+            <path d="M91 54 Q100 60 109 54" fill="none" stroke="var(--face-detail)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <text class="body-label" x="100" y="90">頭・顔</text>
+          </g>
+
+          <!-- 首 -->
+          <g class="body-part" data-part="neck">
+            <!-- hit area -->
+            <rect x="78" y="76" width="44" height="30" rx="6" fill="transparent" stroke="none"/>
+            <rect x="88" y="80" width="24" height="22" rx="6" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="150" y="93">首</text>
+          </g>
+
+          <!-- 胴体（胸） -->
+          <g class="body-part" data-part="chest">
+            <path d="M62 100 Q55 104 52 120 L48 180 Q50 195 100 197 Q150 195 152 180 L148 120 Q145 104 138 100 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="100" y="155">胸・心臓</text>
+          </g>
+
+          <!-- 肩（左） -->
+          <g class="body-part" data-part="shoulder-left">
+            <ellipse cx="47" cy="108" rx="18" ry="14" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 肩（右） -->
+          <g class="body-part" data-part="shoulder-right">
+            <ellipse cx="153" cy="108" rx="18" ry="14" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 腕（左） -->
+          <g class="body-part" data-part="arm-left">
+            <path d="M32 118 Q24 130 22 160 Q20 185 26 210 Q30 220 38 218 Q46 216 48 205 Q50 180 50 158 Q50 133 42 120 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="8" y="170">腕</text>
+          </g>
+
+          <!-- 腕（右） -->
+          <g class="body-part" data-part="arm-right">
+            <path d="M168 118 Q176 130 178 160 Q180 185 174 210 Q170 220 162 218 Q154 216 152 205 Q150 180 150 158 Q150 133 158 120 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="174" y="170">腕</text>
+          </g>
+
+          <!-- 手（左） -->
+          <g class="body-part" data-part="hand-left">
+            <!-- hit area -->
+            <ellipse cx="32" cy="228" rx="22" ry="26" fill="transparent" stroke="none"/>
+            <ellipse cx="32" cy="228" rx="12" ry="16" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 手（右） -->
+          <g class="body-part" data-part="hand-right">
+            <!-- hit area -->
+            <ellipse cx="168" cy="228" rx="22" ry="26" fill="transparent" stroke="none"/>
+            <ellipse cx="168" cy="228" rx="12" ry="16" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- お腹 -->
+          <g class="body-part" data-part="abdomen">
+            <path d="M50 195 Q50 240 55 265 Q60 280 100 282 Q140 280 145 265 Q150 240 150 195 Q125 200 100 200 Q75 200 50 195 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="100" y="245">お腹</text>
+          </g>
+
+          <!-- 腰・骨盤 -->
+          <g class="body-part" data-part="lower-back">
+            <path d="M57 278 Q55 295 58 308 Q65 322 100 324 Q135 322 142 308 Q145 295 143 278 Q120 284 100 284 Q80 284 57 278 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+            <text class="body-label" x="100" y="308">腰・股関節</text>
+          </g>
+
+          <!-- 太もも（左） -->
+          <g class="body-part" data-part="thigh-left">
+            <path d="M60 320 Q54 330 52 360 Q50 390 54 410 Q58 422 72 422 Q84 422 86 410 Q88 390 86 360 Q84 332 78 320 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 太もも（右） -->
+          <g class="body-part" data-part="thigh-right">
+            <path d="M140 320 Q146 330 148 360 Q150 390 146 410 Q142 422 128 422 Q116 422 114 410 Q112 390 114 360 Q116 332 122 320 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- ひざ（左） -->
+          <g class="body-part" data-part="knee-left">
+            <!-- hit area -->
+            <ellipse cx="70" cy="428" rx="26" ry="22" fill="transparent" stroke="none"/>
+            <ellipse cx="70" cy="428" rx="18" ry="14" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- ひざ（右） -->
+          <g class="body-part" data-part="knee-right">
+            <!-- hit area -->
+            <ellipse cx="130" cy="428" rx="26" ry="22" fill="transparent" stroke="none"/>
+            <ellipse cx="130" cy="428" rx="18" ry="14" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- すね・ふくらはぎ（左） -->
+          <g class="body-part" data-part="shin-left">
+            <path d="M54 440 Q50 455 50 475 Q50 490 54 498 Q58 504 68 504 Q78 504 80 498 Q82 490 82 475 Q82 455 80 440 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- すね・ふくらはぎ（右） -->
+          <g class="body-part" data-part="shin-right">
+            <path d="M146 440 Q150 455 150 475 Q150 490 146 498 Q142 504 132 504 Q122 504 120 498 Q118 490 118 475 Q118 455 120 440 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 足首・足（左） -->
+          <g class="body-part" data-part="foot-left">
+            <!-- hit area -->
+            <ellipse cx="66" cy="517" rx="24" ry="18" fill="transparent" stroke="none"/>
+            <path d="M52 502 Q48 510 48 520 Q48 528 55 530 Q68 532 80 528 Q86 524 84 516 Q82 508 78 504 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- 足首・足（右） -->
+          <g class="body-part" data-part="foot-right">
+            <!-- hit area -->
+            <ellipse cx="134" cy="517" rx="24" ry="18" fill="transparent" stroke="none"/>
+            <path d="M148 502 Q152 510 152 520 Q152 528 145 530 Q132 532 120 528 Q114 524 116 516 Q118 508 122 504 Z" fill="var(--body-fill)" stroke="var(--body-stroke)" stroke-width="2"/>
+          </g>
+
+          <!-- ラベル -->
+          <text class="body-label" x="28" y="375">脚</text>
+
+        </svg>
+
+        <!-- ホバー時のツールチップ -->
+        <div class="tooltip" id="tooltip">
+          <div class="tooltip-title" id="tooltipTitle"></div>
+          <div class="tooltip-list" id="tooltipList"></div>
+          <button class="tooltip-btn" id="tooltipBtn">詳しく調べる →</button>
+        </div>
+      </div>
+
+      <!-- サイドランキング -->
+      <div class="side-ranking">
+        <div class="section-title">よく調べられてる</div>
+        <div class="ranking-list" id="rankingList"></div>
+      </div>
+
+      <!-- 詳細パネル -->
+      <div class="detail-panel" id="detailPanel">
+        <div class="panel-header">
+          <span class="panel-icon" id="panelIcon"></span>
+          <h2 id="panelTitle"></h2>
+          <button class="panel-close" id="panelClose">✕</button>
+        </div>
+        <div class="panel-supervised">
+          <span class="supervised-badge">👨‍⚕️ 医師監修</span>
+          <span class="supervised-note">掲載情報は一般的な医学知識に基づくものです</span>
+        </div>
+        <div class="panel-body">
+          <p class="panel-desc" id="panelDesc"></p>
+          <div class="symptoms-grid" id="symptomsGrid"></div>
+          <!-- 広告③：詳細パネル内バナー -->
+          <div class="ad-slot ad-panel">
+            <span class="ad-label">広告</span>
+            <!-- Google AdSense などのコードをここに貼り付け -->
+          </div>
+
+          <div class="disclaimer">
+            ⚠️ このサイトは医療診断ではありません。症状が続く場合は医療機関を受診してください。
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 広告②：レクタングル（300×250） -->
+    <div class="ad-slot ad-rect">
+      <span class="ad-label">広告</span>
+      <!-- Google AdSense などのコードをここに貼り付け -->
+      <!-- <ins class="adsbygoogle" ...></ins> -->
+    </div>
+
+    <!-- 年齢別おすすめ -->
+    <div class="stats-section">
+      <div class="age-recommend" id="ageRecommend">
+        <div class="section-title">
+          <span id="ageRecommendTitle">この年代に多い症状</span>
+        </div>
+        <div class="recommend-chips" id="recommendChips"></div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
