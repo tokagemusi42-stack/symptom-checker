@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tokagemusi42-stack.github.io/symptom-checker/sitemap.xml
